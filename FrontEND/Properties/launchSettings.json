@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "FrontEND (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "FrontEND (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Frontend.Pages.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Frontend.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="2*" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Home" Style="{ThemeResource HeaderTextBlockStyle}"
+                   VerticalAlignment="Bottom" Margin="20"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" 
+                    Spacing="15" Grid.Row="1" Margin="20,80" Padding="20" 
+                    CornerRadius="30" Background="{ThemeResource MainBackground}">
+
+            <Button   VerticalAlignment="Center" Height="300" Width="200" Click="Button_Click" Background="{ThemeResource EmpGradient}">
+                <Button.Content>
+                    <StackPanel>
+                        <FontIcon Glyph="&#xE716;" FontSize="100"/>
+                        <TextBlock Text="Employees" FontSize="34"
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button  VerticalAlignment="Center"  Height="300" Width="200"  Click="Button_Click_1" Background="{ThemeResource AppGradient}">
+                <Button.Content>
+                    <StackPanel>
+                        <FontIcon Glyph="&#xE780;" FontSize="100"/>
+                        <TextBlock Text="Applicants" FontSize="34"
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button  VerticalAlignment="Center" Height="300" Width="200" Click="Button_Click_2" Background="{ThemeResource AttendanceGradient}">
+                <Button.Content>
+                    <StackPanel>
+                        <FontIcon Glyph="&#xE823;" FontSize="100"/>
+                        <TextBlock Text="Attendance" FontSize="34"
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Frontend.Pages.MoreOptionsMainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Frontend.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid  Padding="10" ColumnSpacing="100">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0"
+               Background="{ThemeResource MainBackground}" CornerRadius="10"
+                    BorderBrush="{ThemeResource SystemAccentColor}" BorderThickness="1"
+                    RowSpacing="20" Padding="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition  Height="Auto"/>
+            </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Width="250" 
+                    Spacing="10" >
+            <Border BorderBrush="{ThemeResource SystemAccentColor}" BorderThickness="0,0,0,1" >
+                <TextBlock Text="Skills" Style="{ThemeResource HeaderTextBlockStyle}" />
+            </Border>
+                <ListView ItemsSource="{x:Bind ViewModel.SkillList,Mode=OneWay}"  SelectionMode="Single" SelectedItem="{x:Bind ViewModel.SelectedSkill,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+            <StackPanel Orientation="Horizontal" Name="NewSkillBox">
+                <TextBox  Text="{x:Bind ViewModel.NewSkill,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                <Button Command="{x:Bind ViewModel.AddSkillCommand}" Click="CancelAddSkillBtn_Click">
+                    <Button.Content>
+                        <FontIcon Glyph="&#xE73E;" />
+                    </Button.Content>
+                </Button>
+                <Button x:Name="CancelAddSkillBtn" Click="CancelAddSkillBtn_Click">
+                    <Button.Content>
+                        <FontIcon Glyph="&#xE711;" />
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+            
+
+        </StackPanel>
+            <StackPanel Grid.Row="1"  Orientation="Horizontal" Spacing="20" HorizontalAlignment="Center" >
+                <Button x:Name="AddSkillBtn" Click="AddSkillBtn_Click"  >
+                    <Button.Content>
+                        <StackPanel Orientation="Vertical" Spacing="5" Padding="20,0">
+                            <FontIcon Glyph="&#xE710;" />
+                            <TextBlock Text="Add" />
+
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+                <Button x:Name="DelSkillBtn" Command="{x:Bind ViewModel.DelSkillCommand}">
+                    <Button.Content>
+                        <StackPanel Orientation="Vertical" Spacing="5" Padding="20,0">
+                            <FontIcon Glyph="&#xE711;" />
+                            <TextBlock Text="Del" />
+
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Column="1"
+              Background="{ThemeResource MainBackground}" CornerRadius="10"
+                    BorderBrush="{ThemeResource SystemAccentColor}" BorderThickness="1"
+                    Padding="10" RowSpacing="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition  Height="Auto"/>
+            </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Width="250"
+                    Spacing="10"
+                    >
+            <Border BorderBrush="{ThemeResource SystemAccentColor}" BorderThickness="0,0,0,1" >
+                <TextBlock Text="Job Titles" Style="{ThemeResource HeaderTextBlockStyle}" />
+            </Border>
+            <ListView ItemsSource="{x:Bind ViewModel.CatagoryList,Mode=OneWay}" SelectionMode="Single" SelectedItem="{x:Bind ViewModel.SelectedCatagory,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+            <StackPanel Orientation="Horizontal" Name="NewCatBox"
+                        HorizontalAlignment="Stretch">
+            <TextBox Text="{x:Bind ViewModel.NewCatagory,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                <Button Command="{x:Bind ViewModel.AddCatagoryCommand}" Click="CancelAddCatagoryBtn_Click">
+                    <Button.Content>
+                        <FontIcon Glyph="&#xE73E;" />
+                    </Button.Content>
+                </Button>
+                <Button x:Name="CancelAddCatagoryBtn" Click="CancelAddCatagoryBtn_Click">
+                    <Button.Content>
+                        <FontIcon Glyph="&#xE711;" />
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+            
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="20" HorizontalAlignment="Center" VerticalAlignment="Bottom" >
+                <Button x:Name="AddCatagoryBtn" Click="AddCatagoryBtn_Click">
+                    <Button.Content>
+                        <StackPanel Orientation="Vertical" Spacing="5" Padding="20,0">
+                            <FontIcon Glyph="&#xE710;" />
+                            <TextBlock Text="Add" />
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+                <Button x:Name="DelCatagoryBtn" Command="{x:Bind ViewModel.DelCatCommand}">
+                    <Button.Content>
+                        <StackPanel Orientation="Vertical" Spacing="5" Padding="20,0">
+                            <FontIcon Glyph="&#xE711;" />
+                            <TextBlock Text="Del" />
+
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+
+            </StackPanel>
+        </Grid>
+
+
+    </Grid>
+</Page>

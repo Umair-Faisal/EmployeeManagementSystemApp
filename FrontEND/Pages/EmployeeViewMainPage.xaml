@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Frontend.Pages.EmployeeViewMainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Frontend.Pages"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:img="using:System.Drawing.Imaging"
+    xmlns:dt="using:Backend.Models"
+    xmlns:converters="using:Frontend.Converters" xmlns:vm_models="using:ViewModel.VM_Models" d:DataContext="{d:DesignInstance Type=vm_models:EmployeeVM}"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid x:Name="MainGrid" Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Orientation="Horizontal" Margin="0,10" Padding="10" BorderBrush="{ThemeResource SystemAccentColor}" BorderThickness="0,0,0,1">
+            <TextBlock Text="Search: " VerticalAlignment="Bottom"/>
+            <TextBox Width="100" Margin="20,0" VerticalAlignment="Bottom" 
+                     Text="{x:Bind ViewModel.SearchText, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
+        <controls:DataGrid   Background="{ThemeResource MainBackground}"  x:Name="EmployeeGrid" Grid.Row="2" 
+                             ItemsSource="{x:Bind ViewModel.Employees, Mode=OneWay}"
+                           AutoGenerateColumns="False" CanUserResizeColumns="False"
+                           GridLinesVisibility="Horizontal" IsReadOnly="True"
+                           Width="auto" Height="auto" RowDetailsVisibilityMode="VisibleWhenSelected"
+                           SelectionMode="Single" RowDetailsTemplate="{StaticResource DataGridRowDetailTemplate1}"
+                           >
+            <controls:DataGrid.Columns>
+                <controls:DataGridTemplateColumn Header="Image">
+                    <controls:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <PersonPicture ProfilePicture="{Binding Image,Mode=OneWay}" Height="40" Margin="5"/>
+                        </DataTemplate>
+                    </controls:DataGridTemplateColumn.CellTemplate>
+                </controls:DataGridTemplateColumn>
+
+                <controls:DataGridTextColumn Header="ID" Binding="{Binding EmployeeId}" >
+                    <controls:DataGridTextColumn.CellStyle>
+                        <Style TargetType="controls:DataGridCell">
+                            <Setter Property="HorizontalAlignment" Value="Right" />
+                        </Style>
+                    </controls:DataGridTextColumn.CellStyle>
+                </controls:DataGridTextColumn>
+                <controls:DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <controls:DataGridTextColumn Header="Catagory" Binding="{Binding Catagory}" />
+                <controls:DataGridTextColumn Header="Skills" Binding="{Binding Skills}" />
+                <controls:DataGridTextColumn Header="Salary" Binding="{Binding Salary}" />
+            </controls:DataGrid.Columns>
+        </controls:DataGrid>
+    </Grid>
+</Page>

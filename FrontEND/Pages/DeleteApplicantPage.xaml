@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Frontend.Pages.DeleteApplicantPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Frontend.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10" Padding="10"
+                    CornerRadius="20" Background="{ThemeResource MainBackground}">
+            <ComboBox ItemsSource="{x:Bind ViewModel.ApplicantList}" 
+                  SelectedItem="{x:Bind ViewModel.Selectedapplicant,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Command="{x:Bind ViewModel.DelButtonCommand}" HorizontalAlignment="Center" Click="Button_Click">
+                <Button.Content>
+                    <FontIcon Glyph="&#xE74D;" />
+                </Button.Content>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>
