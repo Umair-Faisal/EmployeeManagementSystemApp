@@ -1,75 +1,128 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <Window
     x:Class="Frontend.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Frontend"
     xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:Frontend"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <Grid Background="{ThemeResource MainBackground}">
-        <Grid Height="28" Name="TitleBar" 
-              VerticalAlignment="Top" HorizontalAlignment="Stretch"
-              Margin="48,0,0,0" >
-        </Grid>
+        <Grid
+            Name="TitleBar"
+            Height="28"
+            Margin="48,0,0,0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Top" />
 
-        <NavigationView x:Name="MainView"
-                        SelectionChanged="MainView_SelectionChanged"
-                    BackRequested="MainView_BackRequested" 
-                    Loaded="MainView_Loaded"
-                    IsTitleBarAutoPaddingEnabled="True">
+        <NavigationView
+            x:Name="MainView"
+            BackRequested="MainView_BackRequested"
+            IsTitleBarAutoPaddingEnabled="True"
+            Loaded="MainView_Loaded"
+            SelectionChanged="MainView_SelectionChanged">
             <NavigationView.PaneHeader>
                 <StackPanel Orientation="Horizontal">
                     <FontIcon Glyph="&#xE759;" />
-                    <TextBlock Text="Employee Management" Margin="10,0"  VerticalAlignment="Center"/>
+                    <TextBlock
+                        Margin="10,0"
+                        VerticalAlignment="Center"
+                        Text="Employee Management" />
                 </StackPanel>
             </NavigationView.PaneHeader>
             <NavigationView.MenuItems>
-                <NavigationViewItem Icon="Home" Content="Home" Tag="Frontend.Pages.HomePage"/>
+                <NavigationViewItem
+                    Content="Home"
+                    Icon="Home"
+                    Tag="Frontend.Pages.HomePage" />
                 <NavigationViewItemSeparator />
                 <NavigationViewItemHeader Content="Personel Management" />
-                <NavigationViewItem Icon="People" Content="Employees"  Tag="Frontend.Pages.EmployeeViewMainPage">
+                <NavigationViewItem
+                    Content="Employees"
+                    Icon="People"
+                    Tag="Frontend.Pages.EmployeeViewMainPage">
                     <NavigationViewItem.MenuItems>
-                        <NavigationViewItem Icon="Add" Content="Add New Employee" Tag="Frontend.Pages.AddEmployeePage"/>
-                        <NavigationViewItem Icon="Up" Content="Update Employee Information" Tag="Frontend.Pages.UpdateEmployeePage"/>
-                        <NavigationViewItem Icon="Delete" Content="Delete Employee" Tag="Frontend.Pages.DeleteEmployeePage"/>
+                        <NavigationViewItem
+                            Content="Add New Employee"
+                            Icon="Add"
+                            Tag="Frontend.Pages.AddEmployeePage" />
+                        <NavigationViewItem
+                            Content="Update Employee Information"
+                            Icon="Up"
+                            Tag="Frontend.Pages.UpdateEmployeePage" />
+                        <NavigationViewItem
+                            Content="Delete Employee"
+                            Icon="Delete"
+                            Tag="Frontend.Pages.DeleteEmployeePage" />
                     </NavigationViewItem.MenuItems>
                 </NavigationViewItem>
-                <NavigationViewItem Icon="PhoneBook" Content="Applicants" Tag="Frontend.Pages.ApplicantViewMainPage">
+                <NavigationViewItem
+                    Content="Applicants"
+                    Icon="PhoneBook"
+                    Tag="Frontend.Pages.ApplicantViewMainPage">
                     <NavigationViewItem.MenuItems>
-                        <NavigationViewItem Icon="Add" Content="Add New Applicant" Tag="Frontend.Pages.AddApplicantPage"/>
-                        <NavigationViewItem Icon="Up" Content="Update Applicant Info" Tag="Frontend.Pages.UpdateApplicantPage"/>
-                        <NavigationViewItem Icon="Delete" Content="Delete Applicant" Tag="Frontend.Pages.DeleteApplicantPage"/>
+                        <NavigationViewItem
+                            Content="Add New Applicant"
+                            Icon="Add"
+                            Tag="Frontend.Pages.AddApplicantPage" />
+                        <NavigationViewItem
+                            Content="Update Applicant Info"
+                            Icon="Up"
+                            Tag="Frontend.Pages.UpdateApplicantPage" />
+                        <NavigationViewItem
+                            Content="Delete Applicant"
+                            Icon="Delete"
+                            Tag="Frontend.Pages.DeleteApplicantPage" />
                     </NavigationViewItem.MenuItems>
                 </NavigationViewItem>
                 <NavigationViewItemSeparator />
-                <NavigationViewItemHeader Content="Attendence Management"/>
-                <NavigationViewItem Icon="Clock" Content="Attendence" Tag="Frontend.Pages.AttendenceMainPage" />
-                <NavigationViewItem Icon="Calendar" Content="Monthly Attendence" Tag="Frontend.Pages.MonthlyAttendencePage"/>
+                <NavigationViewItemHeader Content="Attendence Management" />
+                <NavigationViewItem
+                    Content="Attendence"
+                    Icon="Clock"
+                    Tag="Frontend.Pages.AttendenceMainPage" />
+                <NavigationViewItem
+                    Content="Monthly Attendence"
+                    Icon="Calendar"
+                    Tag="Frontend.Pages.MonthlyAttendencePage" />
                 <NavigationViewItemSeparator />
-                <NavigationViewItem Icon="More" Content="More" Tag="Frontend.Pages.MoreOptionsMainPage" />
+                <NavigationViewItem
+                    Content="More"
+                    Icon="More"
+                    Tag="Frontend.Pages.MoreOptionsMainPage" />
             </NavigationView.MenuItems>
 
-            <ScrollViewer >
+            <ScrollViewer>
                 <Grid Margin="0,10,0,0">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" >
-                        <TextBlock Text="Theme" VerticalAlignment="Center"/>
-                        <ToggleSwitch x:Name="ThemeSwith" OffContent="Dark" OnContent="Light"
-                              HorizontalAlignment="Center" Toggled="ThemeSwith_Toggled" IsOn="{x:Bind Theme}">
-                    </ToggleSwitch>
-                        
+                    <StackPanel
+                        Grid.Row="0"
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal"
+                        Spacing="10">
+                        <TextBlock VerticalAlignment="Center" Text="Theme" />
+                        <ToggleSwitch
+                            x:Name="ThemeSwith"
+                            HorizontalAlignment="Center"
+                            IsOn="{x:Bind IsLightThemeEnabled}"
+                            OffContent="Dark"
+                            OnContent="Light"
+                            Toggled="ThemeSwith_Toggled" />
+
                     </StackPanel>
 
 
-                <Frame HorizontalAlignment="Center" VerticalAlignment="Stretch" x:Name="MainFrame" Grid.Row="1"
-                   NavigationFailed="MainFrame_NavigationFailed"
-                   Navigated="MainFrame_Navigated">
-                </Frame>
+                    <Frame
+                        x:Name="MainFrame"
+                        Grid.Row="1"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Stretch"
+                        Navigated="MainFrame_Navigated"
+                        NavigationFailed="MainFrame_NavigationFailed" />
                 </Grid>
             </ScrollViewer>
         </NavigationView>

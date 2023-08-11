@@ -251,18 +251,19 @@ namespace Backend
                 AttendanceDate = date.Date,
                 CheckInTime = checkInTime
             };
+            
 
             using var db = new LocalDB();
-
-            if (db.Attendances.First(x => x.AttendanceDate.Date == attendance.AttendanceDate.Date && x.EmployeeId == attendance.EmployeeId) is not null and Attendance dbAttendance)
+            bool AttendanceExistsInDB = await db.Attendances.AnyAsync(x => x.AttendanceDate.Date == attendance.AttendanceDate.Date && x.EmployeeId == attendance.EmployeeId);
+            if (AttendanceExistsInDB)
             {
+                var dbAttendance = await db.Attendances.FirstAsync(x => x.AttendanceDate.Date == attendance.AttendanceDate.Date && x.EmployeeId == attendance.EmployeeId);
                 if (dbAttendance.CheckOutTime is null) dbAttendance.CheckInTime = checkInTime;
                 else
                 {
                     if (attendance.CheckInTime < dbAttendance.CheckOutTime)
                     {
                         dbAttendance.CheckInTime = checkInTime;
-
                     }
                 }
             }

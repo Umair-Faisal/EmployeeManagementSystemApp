@@ -6,166 +6,159 @@
 
 
     <DataTemplate x:Key="DataGridRowDetailTemplate1">
-        <Grid Background="{ThemeResource MainBackground}">
-            <StackPanel Margin="20,0" Padding="5">
+        <StackPanel Padding="25,5" Background="{ThemeResource MainBackground}">
+            <Border
+                Padding="0,10"
+                BorderBrush="{ThemeResource SystemAccentColor}"
+                BorderThickness="0,0,0,1">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock
-                        FontSize="25"
-                        FontWeight="SemiBold"
-                        Text="{Binding EmployeeId}" />
+                    <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="{Binding EmployeeId}" />
                     <TextBlock
                         Margin="0,0,10,0"
-                        FontSize="25"
-                        FontWeight="SemiBold"
+                        Style="{ThemeResource TitleTextBlockStyle}"
                         Text="." />
-                    <TextBlock
-                        FontSize="25"
-                        FontWeight="SemiBold"
-                        Text="{Binding Name}" />
+                    <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="{Binding Name}" />
                 </StackPanel>
-                <Grid Margin="0,10" Padding="5">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="auto" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        Text="Email :" />
-                    <TextBlock
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        Text="Phone No. :" />
-                    <TextBlock
-                        Grid.Row="2"
-                        Grid.Column="0"
-                        Text="Father Name :" />
-                    <TextBlock
-                        Grid.Row="3"
-                        Grid.Column="0"
-                        Text="Occupation :" />
-                    <TextBlock
-                        Grid.Row="4"
-                        Grid.Column="0"
-                        Text="Skills :" />
-                    <TextBlock
-                        Grid.Row="5"
-                        Grid.Column="0"
-                        Text="Salary :" />
-                    <TextBlock
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        HorizontalAlignment="Right"
-                        Text="{Binding Email}" />
-                    <TextBlock
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        HorizontalAlignment="Right"
-                        Text="{Binding Phone}" />
-                    <TextBlock
-                        Grid.Row="2"
-                        Grid.Column="1"
-                        HorizontalAlignment="Right"
-                        Text="{Binding Fathername}" />
-                    <TextBlock
-                        Grid.Row="3"
-                        Grid.Column="1"
-                        HorizontalAlignment="Right"
-                        Text="{Binding Catagory}" />
-                    <TextBlock
-                        Grid.Row="4"
-                        Grid.Column="1"
-                        HorizontalAlignment="Right"
-                        Text="{Binding Skills}" />
-                    <TextBlock
-                        Grid.Row="5"
-                        Grid.Column="1"
-                        HorizontalAlignment="Right"
-                        Text="{Binding Salary}" />
-                </Grid>
-            </StackPanel>
 
-        </Grid>
+            </Border>
+            <Grid Margin="0,10" Padding="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Text="Email :" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Text="Phone No. :" />
+                <TextBlock
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Text="Father Name :" />
+                <TextBlock
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Text="Occupation :" />
+                <TextBlock
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Text="Skills :" />
+                <TextBlock
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    Text="Salary :" />
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    Text="{Binding Email}" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    Text="{Binding Phone}" />
+                <TextBlock
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    Text="{Binding Fathername}" />
+                <TextBlock
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    Text="{Binding Catagory}" />
+                <TextBlock
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    Text="{Binding Skills}" />
+                <TextBlock
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    Text="{Binding Salary}" />
+            </Grid>
+        </StackPanel>
+
     </DataTemplate>
-    <DataTemplate x:Key="DataGridRowDetailTemplate2">
-        <Grid Background="{ThemeResource MainBackground}">
-            <StackPanel Margin="20,0" Padding="5">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock
-                        FontSize="17"
-                        FontWeight="SemiBold"
-                        Text="{Binding ApplicantId}" />
-                    <TextBlock
-                        FontSize="17"
-                        FontWeight="SemiBold"
-                        Text="." />
-                    <TextBlock
-                        FontSize="17"
-                        FontWeight="SemiBold"
-                        Text="{Binding Name}" />
-                </StackPanel>
-                <Grid Margin="0,10" Padding="5">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="auto" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        Text="Email :" />
-                    <TextBlock
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        Text="Phone No. :" />
-                    <TextBlock
-                        Grid.Row="3"
-                        Grid.Column="0"
-                        Text="Occupation :" />
-                    <TextBlock
-                        Grid.Row="4"
-                        Grid.Column="0"
-                        Text="Skills :" />
-                    <TextBlock
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        HorizontalAlignment="Right"
-                        Text="{Binding Email}" />
-                    <TextBlock
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        HorizontalAlignment="Right"
-                        Text="{Binding PhoneNo}" />
-                    <TextBlock
-                        Grid.Row="3"
-                        Grid.Column="1"
-                        HorizontalAlignment="Right"
-                        Text="{Binding Catagory}" />
-                    <TextBlock
-                        Grid.Row="4"
-                        Grid.Column="1"
-                        HorizontalAlignment="Right"
-                        Text="{Binding Skills}" />
-                </Grid>
-            </StackPanel>
 
-        </Grid>
+
+    <DataTemplate x:Key="DataGridRowDetailTemplate2">
+        <StackPanel Padding="25,5" Background="{ThemeResource MainBackground}">
+            <Border
+                Padding="0,10"
+                BorderBrush="{ThemeResource SystemAccentColor}"
+                BorderThickness="0,0,0,1">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="{Binding ApplicantId}" />
+                    <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="." />
+                    <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="{Binding Name}" />
+                </StackPanel>
+
+            </Border>
+            <Grid Margin="0,10" Padding="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Text="Email :" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Text="Phone No. :" />
+                <TextBlock
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Text="Occupation :" />
+                <TextBlock
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Text="Skills :" />
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    Text="{Binding Email}" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    Text="{Binding PhoneNo}" />
+                <TextBlock
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    Text="{Binding Catagory}" />
+                <TextBlock
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    Text="{Binding Skills}" />
+            </Grid>
+        </StackPanel>
     </DataTemplate>
 
     <DataTemplate x:Key="EmployeeListItemTemplate">

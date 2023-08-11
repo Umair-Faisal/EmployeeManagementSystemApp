@@ -18,15 +18,14 @@ namespace Frontend
     public sealed partial class MainWindow : Window
     {
         List<Tuple<string, string>> Tags { get; set; } = new();
-
-        private bool Theme { get; set; }
+        private bool IsLightThemeEnabled { get; set; }
         public MainWindow()
         {
             this.InitializeComponent();
             this.ExtendsContentIntoTitleBar = true;
             this.SetTitleBar(TitleBar);
             FillTags();
-            Theme = App.Current.RequestedTheme == ApplicationTheme.Light;
+            IsLightThemeEnabled = App.Current.RequestedTheme == ApplicationTheme.Light;
         }
 
         private void FillTags()

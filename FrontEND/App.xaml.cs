@@ -1,4 +1,5 @@
 ﻿using Backend.Contexts;
+using Frontend.Pages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,7 +15,7 @@ namespace Frontend
 
     public partial class App : Application
     {
-        public static IHost? AppHost { get; private set; }
+        public static IHost AppHost { get; private set; }
 
 
         public App()
@@ -26,7 +27,7 @@ namespace Frontend
                     DbContextOptions options = new DbContextOptionsBuilder().UseSqlite(connectionstring).Options;
 
                     services.AddSingleton<MainWindow>();
-                    services.AddSingleton<LocalDB>(s => new LocalDB(options));
+                    services.AddDbContext<LocalDB>(s => new LocalDB(options));
                 })
                 .Build();
             this.InitializeComponent();
@@ -36,10 +37,13 @@ namespace Frontend
         protected override async void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
             VerifyFolderIntegrity();
-
-            using(var db = AppHost.Services.GetRequiredService<LocalDB>())
+            using (var scope = AppHost.Services.CreateScope())
             {
-                db.Database.Migrate();
+                using (var db = AppHost.Services.GetRequiredService<LocalDB>())
+                {
+                    db.Database.Migrate();
+                }
+
             }
             await AppHost.StartAsync();
             m_window = AppHost.Services.GetRequiredService<MainWindow>();
@@ -48,13 +52,15 @@ namespace Frontend
 
         private void VerifyFolderIntegrity()
         {
-            if(!Directory.Exists(AppDataPath.BasePath))
+            if (!Directory.Exists(AppDataPath.BasePath))
                 Directory.CreateDirectory(AppDataPath.BasePath);
             if (!Directory.Exists(AppDataPath.PDFPath))
                 Directory.CreateDirectory(AppDataPath.PDFPath);
             if (!Directory.Exists(AppDataPath.ImgPath))
                 Directory.CreateDirectory(AppDataPath.ImgPath);
         }
+
+        
     }
 
 }

@@ -63,7 +63,6 @@
                           TintColor="#5433ff" TintOpacity="0.5" TintLuminosityOpacity="1" />
 
 
-
             <LinearGradientBrush x:Key="MainBackground" 
                                  StartPoint="0,0.5" EndPoint="0.5,0" >
                 <GradientStop Color="#A5FECB" Offset="0"/>
@@ -77,7 +76,7 @@
             </AcrylicBrush>
             <AcrylicBrush x:Key="NavigationViewTopPaneBackground"
                                    TintColor="Transparent"
-                                   TintOpacity=".6"/>
+                                   TintOpacity="1"/>
             <AcrylicBrush x:Key="NavigationViewExpandedPaneBackground"
                               TintColor="Transparent"
                                TintLuminosityOpacity="0.05" />
@@ -116,7 +115,7 @@
 
             <AcrylicBrush x:Key="NavigationViewDefaultPaneBackground"
                           TintColor="Transparent"
-                          TintLuminosityOpacity="0.05">
+                          TintLuminosityOpacity="0">
             </AcrylicBrush>
             <AcrylicBrush x:Key="NavigationViewTopPaneBackground"
                                    TintColor="Transparent"
