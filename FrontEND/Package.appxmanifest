@@ -10,7 +10,7 @@
   <Identity
     Name="985c6eb8-c50d-40dc-b838-17d15d9debc3"
     Publisher="CN=Umair Faisal"
-    Version="1.0.7.0" />
+    Version="1.0.8.0" />
 
   <mp:PhoneIdentity PhoneProductId="985c6eb8-c50d-40dc-b838-17d15d9debc3" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
