@@ -22,8 +22,6 @@ namespace Frontend.Pages
         public AddApplicantPage()
         {
             this.InitializeComponent();
-            AddBtn.Click += AddBtn_Click;
-            Loaded += LoadData;
         }
 
         private async void LoadData(object sender, RoutedEventArgs e)
@@ -33,7 +31,7 @@ namespace Frontend.Pages
 
         private async void AddBtn_Click(object sender, RoutedEventArgs e)
         {
-            await Task.Delay(1000);
+            await ViewModel.AddApplicantCommand.ExecuteAsync(null);
             Button_Click(sender, e);
         }
 

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<UserControl
+    x:Class="Frontend.Controls.SkillView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:Frontend.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:ViewModel.VM_Models"
+    mc:Ignorable="d">
+
+    <ItemsRepeater Grid.Row="0" ItemsSource="{x:Bind SkillList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+
+        <ItemsRepeater.Layout>
+            <!--<UniformGridLayout MinColumnSpacing="10" MinRowSpacing="10" MaximumRowsOrColumns="{x:Bind PerRow,Mode=OneWay}"/>-->
+            <!--<UniformGridLayout MaximumRowsOrColumns="5" />-->
+            <controls:WrapLayout HorizontalSpacing="5" VerticalSpacing="5" />
+        </ItemsRepeater.Layout>
+        <ItemsRepeater.ItemTemplate>
+            <DataTemplate x:DataType="vm:SkillVM">
+                <Border
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    BorderBrush="{ThemeResource SystemAccentColor}"
+                    BorderThickness="2"
+                    CornerRadius="10">
+                    <StackPanel Background="{ThemeResource MainBackground}" Orientation="Horizontal">
+                        <TextBlock
+                            Margin="5"
+                            Style="{ThemeResource CaptionTextBlockStyle}"
+                            Text="{x:Bind SkillName}" />
+                        <Button
+                            Background="Transparent"
+                            BackgroundSizing="OuterBorderEdge"
+                            Click="Button_Click"
+                            Foreground="{StaticResource ApplicationPageBackgroundThemeBrush}">
+                            <Button.Content>
+                                <FontIcon Glyph="&#xE711;" />
+                            </Button.Content>
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </DataTemplate>
+        </ItemsRepeater.ItemTemplate>
+    </ItemsRepeater>
+
+</UserControl>

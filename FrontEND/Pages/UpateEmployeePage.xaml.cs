@@ -1,6 +1,8 @@
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Imaging;
+using Microsoft.UI.Xaml.Navigation;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using ViewModel;
 using ViewModel.ViewModels;
@@ -18,6 +20,8 @@ namespace Frontend.Pages
     public sealed partial class UpdateEmployeePage : Page
     {
         public EmpUpdatePageVM ViewModel { get; set; }
+
+        int PassedID { get; set; }
         public UpdateEmployeePage()
         {
             this.InitializeComponent();
@@ -25,16 +29,30 @@ namespace Frontend.Pages
             Loaded += LoadData;
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            PassedID = 0;
+            if(e.Parameter is int id)
+            {
+                PassedID = id;
+            }
+        }
+
         private async void LoadData(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
         {
             await ViewModel.LoadData();
+            if(PassedID != 0)
+            {
+                ViewModel.Employee = ViewModel.EmployeeList.First(x => x.EmployeeId == PassedID);
+            }
+
         }
 
 
 
         private async void UpdateBtn_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
         {
-            await Task.Delay(1000);
+            await ViewModel.UpdateEmployeeCommand.ExecuteAsync(null);
             Button_Click_1(sender, e);
         }
 

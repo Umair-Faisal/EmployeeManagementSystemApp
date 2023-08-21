@@ -2,7 +2,9 @@
 using Backend.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml.Media.Imaging;
+using System;
 using System.Threading.Tasks;
+using Windows.ApplicationModel;
 
 namespace ViewModel.VM_Models;
 
@@ -38,6 +40,14 @@ public partial class EmployeeVM : ObservableObject
     [ObservableProperty]
     CatagoryVM catagory;
 
+    [ObservableProperty]
+    DateTime? startdate;
+
+
+    [ObservableProperty]
+    DateTime? leavedate;
+
+    public bool HasLeft => Leavedate == null;
 
     [ObservableProperty]
     CustomCollection<Leave> leaves;
@@ -75,6 +85,8 @@ public partial class EmployeeVM : ObservableObject
         phone = employee.PhoneNo ?? string.Empty;
         email = employee.Email ?? string.Empty;
         salary = employee.Salary ?? 0;
+        startdate = employee.StartingDate;
+        leavedate = employee.LeavingDate ;
         if (employee.CatagoryNavigation != null)
         {
 
@@ -97,6 +109,7 @@ public partial class EmployeeVM : ObservableObject
         CustomCollection<Skill> _skills = new();
         CustomCollection<Leave> _leaves = new CustomCollection<Leave>();
         foreach (var attendance in this.Attendances) _attendances.Add(attendance);
+
         foreach (var skill in this.Skills) _skills.Add(skill.ToDTO());
         foreach (var leave in this.Leaves) _leaves.Add(leave);
         return new()
@@ -113,6 +126,8 @@ public partial class EmployeeVM : ObservableObject
             Skills = _skills,
             Attendances = _attendances,
             Leaves = _leaves,
+            LeavingDate = Leavedate,
+            StartingDate = Startdate,
         };
     }
 

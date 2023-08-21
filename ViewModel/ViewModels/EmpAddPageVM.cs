@@ -2,6 +2,7 @@
 using Backend.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,6 +22,8 @@ public partial class EmpAddPageVM : ObservableObject
     [ObservableProperty]
     SkillVM selectedSkill;
 
+    [ObservableProperty]
+    DateTimeOffset selectedDate;
 
 
     [ObservableProperty]
@@ -44,6 +47,7 @@ public partial class EmpAddPageVM : ObservableObject
     async Task AddEmployee()
     {
         Employee.Skills.FromEnum(SelectedSkills.AsEnumerable());
+        Employee.Startdate = SelectedDate.DateTime.Date;
         Employee added_emp = Employee.ToDTO();
         await DataAccess.AddEmployee(added_emp);
     }

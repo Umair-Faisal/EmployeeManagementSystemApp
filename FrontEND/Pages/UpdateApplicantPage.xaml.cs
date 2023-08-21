@@ -23,15 +23,9 @@ namespace Frontend.Pages
         public UpdateApplicantPage()
         {
             this.InitializeComponent();
-            this.Loaded += LoadData;
-            AddBtn.Click += AddBtn_Click;
+
         }
 
-        private async void AddBtn_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
-        {
-            await Task.Delay(1000);
-            Button_Click(sender, e);
-        }
 
         private async void LoadData(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
         {
@@ -82,6 +76,12 @@ namespace Frontend.Pages
             {
                 ViewModel.SelectedCVPath = file.Path;
             }
+        }
+
+        private async void UpdateButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+        {
+            await ViewModel.UpdateApplicantCommand.ExecuteAsync(null);
+            Button_Click(sender, e);
         }
     }
 }

@@ -18,6 +18,9 @@ namespace Frontend.Pages
         {
             this.InitializeComponent();
             Loaded += LoadData;
+
+
+
         }
 
         private async void LoadData(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)

@@ -1,10 +1,14 @@
 using CommunityToolkit.WinUI.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using ViewModel.VM_Models;
+using Windows.UI;
+using Windows.UI.Xaml.Interop;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -24,11 +28,9 @@ namespace Frontend.Controls
             var panel = (StackPanel)button.Parent;
             var textblock = panel.FindChild<TextBlock>();
             string skillname = textblock.Text;
-            SkillList = new(SkillList.Where(x => x.SkillName != skillname));
+            var skill = SkillList.First(x => x.SkillName == skillname);
+            SkillList.Remove(skill);
         }
-
-
-        public Random random { get; set; } = new();
 
 
         public int PerRow

@@ -22,7 +22,6 @@ public sealed partial class AddEmployeePage : Page
     {
         this.InitializeComponent();
         Loaded += AddEmployeePage_Loaded;
-        AddButton.Click += AfterClick;
     }
 
     private async void AddEmployeePage_Loaded(object sender, RoutedEventArgs e)
@@ -53,14 +52,18 @@ public sealed partial class AddEmployeePage : Page
         }
 
     }
-    private async void AfterClick(object sender, RoutedEventArgs e)
-    {
-        await Task.Delay(1500);
-        Button_Click(sender, e);
-    }
+
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {
         Frame.Navigate(typeof(EmployeeViewMainPage));
+    }
+
+    private async void AddButton_Click(object sender, RoutedEventArgs e)
+    {
+        await ViewModel.AddEmployeeCommand.ExecuteAsync(this);
+        Frame.Navigate(typeof(EmployeeViewMainPage));
+
+
     }
 }

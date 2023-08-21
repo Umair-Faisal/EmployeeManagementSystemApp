@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -11,6 +12,13 @@ using ViewModel.VM_Models;
 
 namespace ViewModel.ViewModels
 {
+    public enum DateType
+    {
+        Day,
+        Month,
+        Year
+    }
+
     public partial class AttendencePageVM : ObservableObject
     {
 
@@ -29,6 +37,17 @@ namespace ViewModel.ViewModels
         partial void OnSelectedEmployeeChanged(EmployeeVM? value)
             => FilterDataGrid();
 
+        public IEnumerable<DateType> DateFilters = Enum.GetValues(typeof(DateType)).Cast<DateType>();
+        
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(ByDay))]
+        [NotifyPropertyChangedFor(nameof(ByMonth))]
+        DateType datefilter;
+
+
+        public bool ByDay => Datefilter == DateType.Day;
+        public bool ByMonth => Datefilter != DateType.Year;
+        public bool ByYear = true;
 
 
         [ObservableProperty]
@@ -62,6 +81,7 @@ namespace ViewModel.ViewModels
 
         [ObservableProperty]
         DateTimeOffset? date;
+
 
         [RelayCommand]
         async Task CheckIn()
@@ -102,6 +122,8 @@ namespace ViewModel.ViewModels
             selectedDate = null;
             selectedEmployee = null;
             date = DateTimeOffset.Now;
+            CheckInTime = DateTime.Now.TimeOfDay;
+            checkOutTime = DateTime.Now.TimeOfDay;
         }
 
 
@@ -131,8 +153,13 @@ namespace ViewModel.ViewModels
                 attens = attens.Where(x => x.EmployeeId == SelectedEmployee.EmployeeId).ToList();
             if (SelectedDate != null)
             {
+                if (Datefilter == DateType.Day)
+                    attens = attens.Where(x => x.AttendenceDate == DateOnly.FromDateTime(SelectedDate.Value.LocalDateTime)).ToList();
+                else if (Datefilter == DateType.Month)
+                    attens = attens.Where(x => x.AttendenceDate.Month == DateOnly.FromDateTime(SelectedDate.Value.LocalDateTime).Month).ToList();
+                else if (Datefilter == DateType.Year)
+                    attens = attens.Where(x => x.AttendenceDate.Year == DateOnly.FromDateTime(SelectedDate.Value.LocalDateTime).Year).ToList();
 
-                attens = attens.Where(x => x.AttendenceDate == DateOnly.FromDateTime(SelectedDate.Value.LocalDateTime)).ToList();
             }
             AttendanceList.Clear();
             foreach (var att in attens)

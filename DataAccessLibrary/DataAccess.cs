@@ -1,6 +1,7 @@
 ﻿using Backend.Contexts;
 using Backend.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.CompilerServices;
 
 namespace Backend
 {
@@ -8,7 +9,7 @@ namespace Backend
     {
 
         public static async Task<IEnumerable<Employee>> GetEmployees(bool WithSKills = true, bool WithCatagories = true,
-            bool WithAttendences = false, bool WithLeaves = false)
+            bool WithAttendences = false, bool WithLeaves = false,bool LeftAlso = false)
         {
             using LocalDB db = new();
 
@@ -17,6 +18,7 @@ namespace Backend
             if (WithCatagories) { query = query.Include(x => x.CatagoryNavigation); }
             if (WithAttendences) { query = query.Include(x => x.Attendances); }
             if (WithLeaves) { query = query.Include(x => x.Leaves); }
+            if (!LeftAlso) { query = query.Where(x => x.LeavingDate == null); }
 
             return await query.ToListAsync();
         }
@@ -59,6 +61,7 @@ namespace Backend
                     employee.Skills.Add(skill);
                 }
             }
+
             await db.SaveChangesAsync();
         }
 
@@ -79,6 +82,8 @@ namespace Backend
              .SetProperty(x => x.PhoneNo, employee.PhoneNo)
              .SetProperty(x => x.Email, employee.Email)
              .SetProperty(x => x.Catagory, employee.Catagory)
+             .SetProperty(x => x.StartingDate,employee.StartingDate)
+             .SetProperty(x => x.LeavingDate,employee.LeavingDate)
              );
             var db_employee = await db.Employees.Where(x => x.EmployeeId == employee.EmployeeId).Include(x => x.CatagoryNavigation).Include(x => x.Skills).FirstAsync();
 
@@ -214,7 +219,7 @@ namespace Backend
         public static async Task<IEnumerable<Attendance>> GetAttendances()
         {
             using LocalDB db = new();
-            var query = db.Attendances.AsQueryable();
+            var query = db.Attendances.OrderBy(x => x.EmployeeId).ThenBy(x => x.AttendanceDate).AsQueryable();
 
             return await query.ToListAsync();
         }
@@ -277,14 +282,17 @@ namespace Backend
         public static async Task CheckOut(TimeSpan checkOutTime, DateTime date, int EmployeeId)
         {
             using var db = new LocalDB();
-            var att = await db.Attendances.Where(x => x.EmployeeId == EmployeeId && x.AttendanceDate.Date == date.Date).FirstAsync();
-            if (att != null)
+            bool CheckedInOnSameDate = db.Attendances.Any(x => x.EmployeeId == EmployeeId && x.AttendanceDate.Date == date.Date);
+            if(CheckedInOnSameDate)
             {
+            var att = await db.Attendances.Where(x => x.EmployeeId == EmployeeId && x.AttendanceDate.Date == date.Date).FirstAsync();
+           
                 if (att.CheckInTime!.Value < checkOutTime)
                 {
                     att.CheckOutTime = checkOutTime;
                     await db.SaveChangesAsync();
                 }
+
             }
         }
 
@@ -292,7 +300,7 @@ namespace Backend
         public static async Task<IEnumerable<MonthlyAttendance>> GetMonthlyAttendances(int? EmployeeID = null)
         {
             using var db = new LocalDB();
-            var query = db.MonthlyAttendances.AsQueryable();
+            var query = db.MonthlyAttendances.OrderBy(x => x.EmployeeId).ThenBy(x => x.Year).ThenBy(x => x.Month).AsQueryable();
             if (EmployeeID != null) query = query.Where(x => x.EmployeeId == EmployeeID);
             return await query.ToListAsync();
         }

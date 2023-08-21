@@ -92,6 +92,7 @@ namespace Backend.Contexts
                     .WithMany(p => p.Attendances)
                     .HasForeignKey(d => d.EmployeeId)
                     .HasConstraintName("FK__Attendanc__Emplo__4AB81AF0");
+                
             });
 
             modelBuilder.Entity<Catagory>(entity =>

@@ -28,6 +28,8 @@ namespace Frontend
 
                     services.AddSingleton<MainWindow>();
                     services.AddDbContext<LocalDB>(s => new LocalDB(options));
+                    services.AddSingleton<SettingsMainPage>();
+                    services.AddSingleton<TestWindow>();
                 })
                 .Build();
             this.InitializeComponent();

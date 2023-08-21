@@ -1,4 +1,5 @@
 using Frontend.Pages;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
@@ -47,6 +48,8 @@ namespace Frontend
         {
             if (args.IsSettingsSelected)
             {
+
+                
                 MainFrame_Navigate(typeof(SettingsMainPage), args.RecommendedNavigationTransitionInfo);
             }
             else if (args.SelectedItemContainer != null && args.SelectedItemContainer.Tag != null)

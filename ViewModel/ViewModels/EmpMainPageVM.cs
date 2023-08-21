@@ -1,4 +1,5 @@
 ﻿using Backend;
+using Backend.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,13 @@ public partial class EmpMainPageVM : ObservableObject
 
     ObservableCollection<EmployeeVM> EmployeeList { get; set; }
 
+    public IEnumerable<EmployeeVM> Employees => EmployeeList.Where(employee => Filter_Employees(employee) && LeftStatus(employee));
 
-
-    public IEnumerable<EmployeeVM> Employees => EmployeeList.Where(employee => Filter_Employees(employee));
+    private bool LeftStatus(EmployeeVM employee)
+    {
+        bool hasNotLeft = employee.Leavedate == null;
+        return ShowLeftEmp || hasNotLeft;
+    }
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(Employees))]
@@ -30,6 +35,11 @@ public partial class EmpMainPageVM : ObservableObject
          || employee.EmployeeId.ToString().Contains(SearchText, StringComparison.OrdinalIgnoreCase);
 
     }
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(Employees))]
+    bool showLeftEmp;
+
     public EmpMainPageVM()
     {
         EmployeeList = new();
@@ -46,12 +56,14 @@ public partial class EmpMainPageVM : ObservableObject
 
     public async Task LoadData()
     {
-        var _EmployeeList = await DataAccess.GetEmployees();
+        var _EmployeeList = await DataAccess.GetEmployees(LeftAlso: true);
         foreach (var emp in _EmployeeList)
         {
-            EmployeeVM employee = new(emp);
-            EmployeeList.Add(employee);
+
+                EmployeeVM employee = new(emp);
+                EmployeeList.Add(employee);
         }
+
         await LoadImages();
     }
 

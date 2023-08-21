@@ -19,6 +19,7 @@
         <NavigationView
             x:Name="MainView"
             BackRequested="MainView_BackRequested"
+            IsSettingsVisible="False"
             IsTitleBarAutoPaddingEnabled="True"
             Loaded="MainView_Loaded"
             SelectionChanged="MainView_SelectionChanged">

@@ -16,7 +16,6 @@ namespace Frontend.Pages
         public DeleteEmployeePage()
         {
             this.InitializeComponent();
-            Loaded += LoadData;
 
         }
 
@@ -27,7 +26,7 @@ namespace Frontend.Pages
 
         private async void Button_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
         {
-            await Task.Delay(500);
+            await ViewModel.DelButtonCommand.ExecuteAsync(null);
             this.Frame.Navigate(typeof(EmployeeViewMainPage));
         }
     }

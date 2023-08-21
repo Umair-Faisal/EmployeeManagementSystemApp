@@ -24,6 +24,11 @@ namespace ViewModel.ViewModels
         [ObservableProperty]
         SkillVM selectedSkill;
 
+        [ObservableProperty]
+        DateTimeOffset? selectedDate;
+
+        [ObservableProperty]
+        DateTimeOffset? leftDate;
 
         [ObservableProperty]
         int catIndex;
@@ -42,6 +47,8 @@ namespace ViewModel.ViewModels
                 SelectedSkills.Add(skill);
             }
             CatIndex = CatagoryList.IndexOf(CatagoryList.First(x => x.CatagoryId == value.Catagory.CatagoryId));
+            SelectedDate = Employee.Startdate;
+            LeftDate = Employee.Leavedate;
 
         }
 
@@ -62,6 +69,12 @@ namespace ViewModel.ViewModels
         async Task UpdateEmployee()
         {
             Employee.Skills.FromEnum(SelectedSkills.AsEnumerable());
+            Employee.Startdate = SelectedDate.Value.Date;
+            if(LeftDate is not null)
+            {
+
+            Employee.Leavedate = LeftDate.Value.Date;
+            }
             Employee Upd_emp = Employee.ToDTO();
             await DataAccess.UpdateEmployee(Upd_emp);
         }
@@ -71,6 +84,8 @@ namespace ViewModel.ViewModels
         {
 
             employee = new();
+            selectedDate = null;
+            leftDate = null;
         }
 
         public async Task LoadData()

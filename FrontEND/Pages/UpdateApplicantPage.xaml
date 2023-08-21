@@ -1,15 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <Page
     x:Class="Frontend.Pages.UpdateApplicantPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Frontend.Pages"
+    xmlns:custom="using:Frontend.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:custom="using:Frontend.Controls"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    xmlns:local="using:Frontend.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Loaded="LoadData"
+    mc:Ignorable="d">
 
-    <Grid Margin="20,10" ColumnSpacing="10" RowSpacing="20" Padding="10" Background="{ThemeResource MainBackground}" CornerRadius="25">
+    <Grid
+        Margin="20,10"
+        Padding="10"
+        Background="{ThemeResource MainBackground}"
+        ColumnSpacing="10"
+        CornerRadius="25"
+        RowSpacing="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -24,95 +32,153 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="0"
-                   HorizontalAlignment="Left" VerticalAlignment="Center" 
-                   Text="Applicant ID : " />
-        <ComboBox Grid.Row="0" Grid.Column="1"
-                 HorizontalAlignment="Left" VerticalAlignment="Center"
-                 MaxWidth="100"
-                 ItemsSource="{x:Bind ViewModel.ApplicantList}" SelectedItem="{x:Bind ViewModel.Applicant_current, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Grid.Row="1" Grid.Column="0" 
-                HorizontalAlignment="Left" VerticalAlignment="Center"
-                x:Name="ImageSelector" Click="ImageSelector_Click">
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Text="Applicant ID : " />
+        <ComboBox
+            Grid.Row="0"
+            Grid.Column="1"
+            MaxWidth="100"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            ItemsSource="{x:Bind ViewModel.ApplicantList}"
+            SelectedItem="{x:Bind ViewModel.Applicant_current, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <Button
+            x:Name="ImageSelector"
+            Grid.Row="1"
+            Grid.Column="0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Click="ImageSelector_Click">
             <Button.Content>
                 <StackPanel Orientation="Vertical">
                     <FontIcon Glyph="&#xEE71;" />
-                    <TextBlock Text="Update Image"/>
+                    <TextBlock Text="Update Image" />
                 </StackPanel>
             </Button.Content>
         </Button>
-        <PersonPicture Grid.Row="1" Grid.Column="1"
-                       HorizontalAlignment="Left" VerticalAlignment="Center"
-                       Height="60" x:Name="PersonalPic"
-                       ProfilePicture="{x:Bind ViewModel.Applicant_current.ApplicatImg,Mode=OneWay}"/>
+        <PersonPicture
+            x:Name="PersonalPic"
+            Grid.Row="1"
+            Grid.Column="1"
+            Height="60"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            ProfilePicture="{x:Bind ViewModel.Applicant_current.ApplicatImg, Mode=OneWay}" />
 
-        <TextBlock Grid.Row="2" Grid.Column="0" 
-                   HorizontalAlignment="Left" VerticalAlignment="Center"
-                   Text="Name : " />
-        <TextBox Grid.Row="2" Grid.Column="1" 
-                 HorizontalAlignment="Left" VerticalAlignment="Center"
-                 InputScope="PersonalFullName"
-                 Text="{x:Bind ViewModel.Applicant_current.Name,Mode=TwoWay}" />
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Text="Name : " />
+        <TextBox
+            Grid.Row="2"
+            Grid.Column="1"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            InputScope="PersonalFullName"
+            Text="{x:Bind ViewModel.Applicant_current.Name, Mode=TwoWay}" />
 
-        <TextBlock Grid.Row="3" Grid.Column="0"
-                   HorizontalAlignment="Left" VerticalAlignment="Center"
-                   Text="Phone No. : " />
-        <TextBox Grid.Row="3" Grid.Column="1"
-                 HorizontalAlignment="Left" VerticalAlignment="Center"
-                 Text="{x:Bind ViewModel.Applicant_current.PhoneNo,Mode=TwoWay}" 
-                 InputScope="TelephoneNumber"/>
+        <TextBlock
+            Grid.Row="3"
+            Grid.Column="0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Text="Phone No. : " />
+        <TextBox
+            Grid.Row="3"
+            Grid.Column="1"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            InputScope="TelephoneNumber"
+            Text="{x:Bind ViewModel.Applicant_current.PhoneNo, Mode=TwoWay}" />
 
-        <TextBlock Grid.Row="4" Grid.Column="0" 
-                   HorizontalAlignment="Left" VerticalAlignment="Center"
-                   Text="Email : " />
-        <TextBox Grid.Row="4" Grid.Column="1" 
-                 HorizontalAlignment="Left" VerticalAlignment="Center" 
-                 Text="{x:Bind ViewModel.Applicant_current.Email,Mode=TwoWay}"
-                 InputScope="EmailNameOrAddress"/>
+        <TextBlock
+            Grid.Row="4"
+            Grid.Column="0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Text="Email : " />
+        <TextBox
+            Grid.Row="4"
+            Grid.Column="1"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            InputScope="EmailNameOrAddress"
+            Text="{x:Bind ViewModel.Applicant_current.Email, Mode=TwoWay}" />
 
-        <TextBlock Grid.Row="5" Grid.Column="0" 
-                   HorizontalAlignment="Left" VerticalAlignment="Center"
-                   Text="Job Description : " />
-        <ComboBox Grid.Row="5" Grid.Column="1" 
-                  HorizontalAlignment="Left" VerticalAlignment="Center"
-                  ItemsSource="{x:Bind ViewModel.CatagoryList,Mode=OneWay}" DisplayMemberPath="CatagoryName" 
-                  SelectedItem="{x:Bind ViewModel.Applicant_current.Catagory,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                  SelectedIndex="{x:Bind ViewModel.CatIndex,Mode=OneWay}"
-                  MaxDropDownHeight="300" />
+        <TextBlock
+            Grid.Row="5"
+            Grid.Column="0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Text="Job Description : " />
+        <ComboBox
+            Grid.Row="5"
+            Grid.Column="1"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            DisplayMemberPath="CatagoryName"
+            ItemsSource="{x:Bind ViewModel.CatagoryList, Mode=OneWay}"
+            MaxDropDownHeight="300"
+            SelectedIndex="{x:Bind ViewModel.CatIndex, Mode=OneWay}"
+            SelectedItem="{x:Bind ViewModel.Applicant_current.Catagory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-        <TextBlock Grid.Row="6" Grid.Column="0"
-                   HorizontalAlignment="Left" VerticalAlignment="Center"
-                   Text="Skills : " />
-        <StackPanel Grid.Row="6" Grid.Column="1" 
-                    HorizontalAlignment="Left" VerticalAlignment="Center"
-                    Orientation="Horizontal">
-            <ComboBox IsEditable="False" ItemsSource="{x:Bind ViewModel.SkillList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{x:Bind ViewModel.SelectedSkill,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-            <custom:SkillView SkillList="{x:Bind ViewModel.SelectedSkills,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  />
+        <TextBlock
+            Grid.Row="6"
+            Grid.Column="0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Text="Skills : " />
+        <StackPanel
+            Grid.Row="6"
+            Grid.Column="1"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
+            <ComboBox
+                IsEditable="False"
+                ItemsSource="{x:Bind ViewModel.SkillList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                SelectedItem="{x:Bind ViewModel.SelectedSkill, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <custom:SkillView SkillList="{x:Bind ViewModel.SelectedSkills, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
 
-        <Button Grid.Row="7" Grid.Column="0"
-                HorizontalAlignment="Left" VerticalAlignment="Center"
-                Click="Button_Click_1">
+        <Button
+            Grid.Row="7"
+            Grid.Column="0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Click="Button_Click_1">
 
             <Button.Content>
                 <StackPanel Orientation="Vertical">
-                    <SymbolIcon Symbol="Add"/>
-                    <TextBlock Text="Attach CV"/>
+                    <SymbolIcon Symbol="Add" />
+                    <TextBlock Text="Attach CV" />
                 </StackPanel>
             </Button.Content>
         </Button>
-        <Button Grid.Row="9" Grid.Column="0"
-                x:Name="AddBtn"
-                Content="Update" Style="{StaticResource AccentButtonStyle}" Command="{x:Bind ViewModel.UpdateApplicantCommand}"/>
-        <Button Grid.Row="9" Grid.Column="1" 
-                Content="Cancel" Click="Button_Click" />
+        <Button
+            x:Name="UpdateButton"
+            Grid.Row="9"
+            Grid.Column="0"
+            Click="UpdateButton_Click"
+            Content="Update"
+            Style="{StaticResource AccentButtonStyle}" />
+        <Button
+            Grid.Row="9"
+            Grid.Column="1"
+            Click="Button_Click"
+            Content="Cancel" />
 
     </Grid>
 

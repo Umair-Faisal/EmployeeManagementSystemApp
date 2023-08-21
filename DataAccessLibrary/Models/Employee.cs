@@ -17,6 +17,9 @@ namespace Backend.Models
         public int EmployeeId { get; set; }
         public byte[] EmployeeImg { get; set; }
         public string Name { get; set; }
+
+        public DateTime? StartingDate { get; set; }
+        public DateTime? LeavingDate { get; set; }
         public string FatherName { get; set; }
         public string PhoneNo { get; set; }
         public string Email { get; set; }
